@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helm-complex-chart.name.fullname" . }}
+  name: {{ include "helm-complex-chart.fullname" . }}
   labels:
-    {{- include "helm-complex-chart.name.labels" . | nindent 4 }}
+    {{- include "helm-complex-chart.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "helm-complex-chart.name.selectorLabels" . | nindent 6 }}
+      {{- include "helm-complex-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "helm-complex-chart.name.selectorLabels" . | nindent 8 }}
+        {{- include "helm-complex-chart.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "helm-complex-chart.name.serviceAccountName" . }}
+      serviceAccountName: {{ include "helm-complex-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
