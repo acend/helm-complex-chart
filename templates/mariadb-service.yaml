@@ -1,0 +1,22 @@
+{{- if database.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-mariadb
+  labels:
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/instance: myapp
+    helm.sh/chart: mychart-0.1.0
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  ports:
+    - port: 3306
+      targetPort: mariadb
+      protocol: TCP
+      name: mariadb
+  selector:
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/instance: myapp
+  clusterIP: None
+{{- end }}
