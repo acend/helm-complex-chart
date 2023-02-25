@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp-mariadb
+  name: {{ .Release.Name }}-mariadb
   labels:
     app.kubernetes.io/name: mariadb
     app.kubernetes.io/instance: myapp
