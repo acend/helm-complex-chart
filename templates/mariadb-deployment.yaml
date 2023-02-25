@@ -36,12 +36,12 @@ spec:
           valueFrom:
             secretKeyRef:
               key: mariadb-password
-              name: myapp-mariadb
+              name: {{ .Release.Name }}-mariadb
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               key: mariadb-root-password
-              name: myapp-mariadb
+              name: {{ .Release.Name }}-mariadb
         - name: MYSQL_DATABASE
           value: "acenddb"
         livenessProbe:
